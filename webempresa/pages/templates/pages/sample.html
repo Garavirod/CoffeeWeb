@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Muestra{% endblock %}
+
+{% block content %}
+<section class="page-section about-heading">
+  <div class="container">
+    <div class="about-heading-content mbtm">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 mx-auto">
+          <div class="bg-faded rounded p-5 forced">
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-lower">{{page.title}}</span>
+            </h2>
+            <div class="section-content">
+            {% comment %} Con linebreaks mostramso los saltos de linea {% endcomment %}
+            {% comment %} el safe indica a django que es codigo de contenio seguro {% endcomment %}
+              {{page.content|safe}}
+              {% comment %} I
+                nyectasmos info del procesodr ed e contexto
+                por ejemplo el nombre del usuario que esta identificado como el usuario identifiacdo en la sesión actual
+               {% endcomment %}
+               {% if user.is_authenticated %}
+                {% comment %} de admin de la app pages barra baja modelo barra baja accion a ejecutar 
+                  todo va entre comilla simples haciendo referecia aun path de url
+                  'admin:App_Model_Action' obj.id
+                {% endcomment %}
+                  <p><a href="{% url 'admin:pages_page_change' page.id %}">Editar</a></p>
+               {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
